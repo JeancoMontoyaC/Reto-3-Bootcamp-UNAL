@@ -1,0 +1,63 @@
+/api/v1/user/getUsers:
+  get:
+    tags:
+      - Users
+    security:
+    - bearerAuth: []
+    description: Listar usuarios
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/User'
+            example:
+              {
+                "state": true,
+                "message": "Listado de estudiantes",
+                "users": [
+                  {
+                    "firstName": "pepito",
+                    "secondName": "Pepe",
+                    "surname": "Perez",
+                    "secondSurName": "Perez",
+                    "typeDocument": 1,
+                    "documentNumber": "1123000001",
+                    "email": "pepe@gmail.com",
+                    "phone": "32123122314"
+                  },
+                  {
+                    "firstName": "Juanita",
+                    "secondName": "",
+                    "surname": "Perez",
+                    "secondSurName": "Perez",
+                    "typeDocument": 1,
+                    "documentNumber": "11012000161",
+                    "email": "JuanitaP@gmail.com",
+                    "phone": "32123122314"
+                  }
+                ]
+              }
+      400:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                  description: Estado de la petición
+                message:
+                  type: string
+                  description: Mensaje de error
+            example:
+              {
+                "state": false,
+                "message": "Fallo en el listado de estudiantes"
+              }
